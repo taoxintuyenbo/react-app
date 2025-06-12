@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom"; // Import Outlet for nested routing
+import { Link } from "react-router-dom"; // Import Outlet for nested routing
 import {
   FaTachometerAlt,
   FaCopy,
@@ -10,7 +10,6 @@ import {
   FaBars,
   FaImage,
   FaCogs,
-  FaPowerOff,
 } from "react-icons/fa";
 
 // Navbar Component

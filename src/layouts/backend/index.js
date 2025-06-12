@@ -20,8 +20,8 @@
 // export default LayoutBackend;
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "./navbar";
-import Sidebar from "./sidebar";
+// import Navbar from "./navbar";
+// import Sidebar from "./sidebar";
 
 function LayoutBackend() {
   return (

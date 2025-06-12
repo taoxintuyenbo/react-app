@@ -18,7 +18,6 @@ const AddProduct = () => {
   const [brands, setBrands] = useState([]); // Initialize brands as an empty array
   const [thumbnails, setThumbnails] = useState([]); // State for image files
   const [errors, setErrors] = useState({}); // State to store validation errors
-  const [error, setError] = useState(""); // General error state
   const navigate = useNavigate(); // Initialize useNavigate for navigation
 
   useEffect(() => {
@@ -31,7 +30,7 @@ const AddProduct = () => {
         setCategories(categoryResponse.categories || []);
         setBrands(brandResponse.brands || []);
       } catch (err) {
-        setError("Failed to load categories and brands.");
+        setErrors("Failed to load categories and brands.");
       }
     };
 
@@ -70,14 +69,14 @@ const AddProduct = () => {
 
     try {
       const respone = await ProductService.store(formData); // Adjust this to match your API
-
+      console.log(respone);
       navigate("/admin/product"); // Redirect to the product list after successful submission
     } catch (err) {
       // Check for validation errors
       if (err.response && err.response.data && err.response.data.errors) {
         setErrors(err.response.data.errors); // Set validation errors
       } else {
-        setError("Error adding product. Please try again.");
+        setErrors("Error adding product. Please try again.");
       }
     }
   };

@@ -18,7 +18,7 @@ const OrderDetailList = () => {
     };
 
     fetchOrderDetails();
-  }, []);
+  }, [id]);
 
   const deleteOrderDetail = async (id) => {
     try {

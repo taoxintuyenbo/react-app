@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import ProductSaleService from "../../../services/ProductSaleService"; // Ensure this path is correct
-import { FaArrowLeft } from "react-icons/fa";
 
 const ShowProductSale = () => {
   const { id } = useParams(); // Get product sale ID from URL parameters

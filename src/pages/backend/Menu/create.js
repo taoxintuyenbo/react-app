@@ -18,7 +18,6 @@ const AddMenu = () => {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedTopic, setSelectedTopic] = useState("");
   const [selectedPage, setSelectedPage] = useState("");
-  const [error, setError] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -35,7 +34,7 @@ const AddMenu = () => {
         setTopics(topicResponse.topics || []);
         setPages(pageResponse.posts || []);
       } catch (err) {
-        setError("Failed to load menu data.");
+        setErrors("Failed to load menu data.");
       }
     };
 
@@ -62,7 +61,7 @@ const AddMenu = () => {
       console.log("Debug - Selected Category ID:", selectedCategory);
       console.log("Debug - Available Categories:", categories);
 
-      setError("Vui lòng chọn danh mục hợp lệ.");
+      setErrors("Vui lòng chọn danh mục hợp lệ.");
       return;
     }
 
@@ -82,7 +81,7 @@ const AddMenu = () => {
         console.log(err);
       } else {
         console.log(err);
-        setError("Error adding menu. Please try again.");
+        setErrors("Error adding menu. Please try again.");
       }
     }
   };
@@ -97,7 +96,7 @@ const AddMenu = () => {
       console.log("Debug - Selected Category ID:", selectedBrand);
       console.log("Debug - Available Categories:", categories);
 
-      setError("Vui lòng chọn danh mục hợp lệ.");
+      setErrors("Vui lòng chọn danh mục hợp lệ.");
       return;
     }
     const formData = {
@@ -113,7 +112,7 @@ const AddMenu = () => {
       if (err.response && err.response.data && err.response.data.errors) {
         setErrors(err.response.data.errors);
       } else {
-        setError("Error adding menu. Please try again.");
+        setErrors("Error adding menu. Please try again.");
       }
     }
   };
@@ -125,7 +124,7 @@ const AddMenu = () => {
     )?.name;
 
     if (!selectedTopicName) {
-      setError("Vui lòng chọn danh mục hợp lệ.");
+      setErrors("Vui lòng chọn danh mục hợp lệ.");
       return;
     }
 
@@ -146,7 +145,7 @@ const AddMenu = () => {
       } else {
         console.log(err);
 
-        setError("Error adding menu. Please try again.");
+        setErrors("Error adding menu. Please try again.");
       }
     }
   };
@@ -159,7 +158,7 @@ const AddMenu = () => {
     )?.title;
 
     if (!selectedPostName) {
-      setError("Vui lòng chọn danh mục hợp lệ.");
+      setErrors("Vui lòng chọn danh mục hợp lệ.");
       return;
     }
 
@@ -178,7 +177,7 @@ const AddMenu = () => {
         setErrors(err.response.data.errors);
         console.log(err);
       } else {
-        setError("Error adding menu. Please try again.");
+        setErrors("Error adding menu. Please try again.");
         console.log(err);
       }
     }
@@ -198,7 +197,7 @@ const AddMenu = () => {
       if (err.response && err.response.data && err.response.data.errors) {
         setErrors(err.response.data.errors);
       } else {
-        setError("Error adding menu. Please try again.");
+        setErrors("Error adding menu. Please try again.");
       }
     }
   };

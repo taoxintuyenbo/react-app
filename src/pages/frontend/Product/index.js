@@ -337,9 +337,13 @@ const TatCaSanPham = () => {
     }
   };
 
+  // useEffect(() => {
+  //   fetchProducts();
+  // }, [filters, sort, currentPage]);
+
   useEffect(() => {
     fetchProducts();
-  }, [filters, sort, currentPage]);
+  }, [filters, sort, currentPage, fetchProducts]);
 
   const handleFilterChange = (filterType, value) => {
     setFilters((prevFilters) => {

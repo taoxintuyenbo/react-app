@@ -64,7 +64,7 @@ const ShowProductImage = () => {
               {productImage.thumbnail ? (
                 <img
                   src={`${productImage.thumbnail}`} // Adjust image path
-                  alt={`Product Image ${productImage.id}`}
+                  alt={`Product`}
                   className="w-32 h-32 object-cover rounded-md"
                 />
               ) : (

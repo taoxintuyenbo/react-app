@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom"; // For routing and navigation
 import UserService from "../../../services/UserService"; // Ensure this path is correct
-import { FaSave, FaArrowLeft } from "react-icons/fa";
 
 const EditUser = () => {
   const { id } = useParams(); // Get user ID from URL parameters

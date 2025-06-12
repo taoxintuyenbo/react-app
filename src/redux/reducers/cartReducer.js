@@ -41,9 +41,19 @@ const cartReducer = (state = initCart, action) => {
           amountItem: state.amountItem + 1,
         };
       }
+    // case "TOTAL_CART":
+    //   let total = 0;
+    //   state.carts.map((item) => {
+    //     total += item.price * item.quantity;
+    //   });
+    //   const newState = {
+    //     ...state,
+    //     totalAmount: total,
+    //   };
+    //   return newState;
     case "TOTAL_CART":
       let total = 0;
-      state.carts.map((item) => {
+      state.carts.forEach((item) => {
         total += item.price * item.quantity;
       });
       const newState = {
@@ -51,7 +61,6 @@ const cartReducer = (state = initCart, action) => {
         totalAmount: total,
       };
       return newState;
-
     case "REMOVE_ITEM_CART":
       toast.warning(`Removed ${action.payload.name} from cart`, {
         position: "bottom-right",

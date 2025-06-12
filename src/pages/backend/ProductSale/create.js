@@ -10,7 +10,6 @@ const CreateProductSale = () => {
   const [date_begin, setDateBegin] = useState(""); // State for sale start date
   const [date_end, setDateEnd] = useState(""); // State for sale end date
   const [error, setError] = useState(""); // State for error handling
-  const [success, setSuccess] = useState(""); // State for success message
   const navigate = useNavigate();
 
   // Fetch product data when component mounts
@@ -38,6 +37,7 @@ const CreateProductSale = () => {
         date_end,
       };
       const result = await ProductSaleService.store(newProductSale);
+      console.log(result);
       navigate("/admin/product_sale"); // Redirect to the product list after successful submission
     } catch (err) {
       setError("Failed to create sale. Please try again.");
@@ -53,7 +53,6 @@ const CreateProductSale = () => {
           </h1>
 
           {error && <div className="text-red-500 mb-4">{error}</div>}
-          {success && <div className="text-green-500 mb-4">{success}</div>}
 
           <form onSubmit={handleSubmit}>
             {/* Product Dropdown */}

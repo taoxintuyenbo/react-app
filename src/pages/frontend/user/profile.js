@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // For navigation
 import UserService from "../../../services/UserService"; // Ensure this path is correct
-import { FaSave, FaArrowLeft } from "react-icons/fa";
 import OrderService from "../../../services/OrderService";
 
 const UserProfile = () => {
@@ -81,12 +80,12 @@ const UserProfile = () => {
     }
   };
 
-  const handleLogout = () => {
-    // Remove user data from sessionStorage and reset state
-    sessionStorage.removeItem("user");
-    setUser(null);
-    navigate("/login"); // Redirect to login page after logout
-  };
+  // const handleLogout = () => {
+  //   // Remove user data from sessionStorage and reset state
+  //   sessionStorage.removeItem("user");
+  //   setUser(null);
+  //   navigate("/login"); // Redirect to login page after logout
+  // };
 
   if (!user) {
     return (

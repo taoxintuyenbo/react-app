@@ -5,7 +5,7 @@ import ProductService from "../../../services/ProductService"; // Import Product
 const ShowProduct = () => {
   const { id } = useParams(); // Get product ID from URL parameters
   const [product, setProduct] = useState({});
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const ShowProduct = () => {
       try {
         const result = await ProductService.show(id); // Fetch product data by ID
         setProduct(result.product);
-        setImages(result.images); // Set the images in state
+        // setImages(result.images); // Set the images in state
       } catch (err) {
         setError("Failed to load product data.");
       }

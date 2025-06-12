@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import ConfigService from "../../../services/ConfigService";
 import ContactService from "../../../services/ContactService";
 

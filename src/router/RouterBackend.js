@@ -36,7 +36,6 @@ import EditCategory from "../pages/backend/Categories/edit";
 import ShowCategory from "../pages/backend/Categories/show";
 import TrashCategory from "../pages/backend/Categories/trash";
 
-import AddOrderDetail from "../pages/backend/OrderDetail/create";
 import EditOrderDetail from "../pages/backend/OrderDetail/edit";
 import ShowOrderDetail from "../pages/backend/OrderDetail/show";
 import TrashOrderDetail from "../pages/backend/OrderDetail/trash";
