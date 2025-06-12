@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import BrandService from "../../../services/BrandService";
-import { FaSave, FaArrowLeft } from "react-icons/fa";
 
 const EditBrand = () => {
   const { id } = useParams(); // Get brand ID from URL parameters

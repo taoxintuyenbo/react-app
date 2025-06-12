@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import ContactService from "../../../services/ContactService";
-import { FaSave, FaArrowLeft } from "react-icons/fa";
 
 const EditContact = () => {
   const { id } = useParams(); // Get contact ID from URL parameters

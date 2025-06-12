@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import CategoryService from "../../../services/CategoryService";
-import { FaSave, FaArrowLeft } from "react-icons/fa";
 
 const EditCategory = () => {
   const { id } = useParams(); // Get category ID from URL parameters
