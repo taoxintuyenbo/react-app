@@ -6,7 +6,7 @@
 // import ProductCard from "../../../components/ProductCard";
 // import ProductCardListView from "../../../components/ProductCardListView";
 
-// const AllProducts = () => {
+// const TatCaSanPham = () => {
 //   const [products, setProducts] = useState([]);
 //   const [categories, setCategories] = useState([]);
 //   const [brands, setBrands] = useState([]);
@@ -24,7 +24,7 @@
 //   const [showAllCategories, setShowAllCategories] = useState(false);
 //   const [showAllBrands, setShowAllBrands] = useState(false);
 
-//   const maxItemsToShow = 5; // Limit for initial display
+//   const maxItemsToShow = 5; // Giới hạn số mục hiển thị ban đầu
 
 //   useEffect(() => {
 //     const fetchCategoriesAndBrands = async () => {
@@ -34,7 +34,7 @@
 //         setCategories(categoryResponse.categories || []);
 //         setBrands(brandResponse.brands || []);
 //       } catch (err) {
-//         setError("Failed to load categories and brands.");
+//         setError("Không thể tải danh mục và thương hiệu.");
 //       }
 //     };
 //     fetchCategoriesAndBrands();
@@ -60,14 +60,18 @@
 //         setProducts([]);
 //       }
 //     } catch (error) {
-//       console.error("Error fetching products:", error);
-//       setError("Failed to fetch products");
+//       console.error("Lỗi tải sản phẩm:", error);
+//       setError("Không thể tải sản phẩm.");
 //     }
 //   };
 
+//   // useEffect(() => {
+//   //   fetchProducts();
+//   // }, [filters, sort, currentPage]);
+
 //   useEffect(() => {
 //     fetchProducts();
-//   }, [filters, sort, currentPage]);
+//   }, [filters, sort, currentPage, fetchProducts]);
 
 //   const handleFilterChange = (filterType, value) => {
 //     setFilters((prevFilters) => {
@@ -111,22 +115,24 @@
 
 //   return (
 //     <div className="container mx-auto my-8">
-//       <h1 className="text-center text-2xl font-bold mt-4 mb-8">All Products</h1>
+//       <h1 className="text-center text-2xl font-bold mt-4 mb-8">
+//         Tất Cả Sản Phẩm
+//       </h1>
 //       {error && <p className="text-center text-red-500">{error}</p>}
 
 //       <div className="flex justify-end mb-4">
 //         <label className="block">
-//           Sort By:
+//           Sắp xếp theo:
 //           <select
 //             name="sort"
 //             value={sort}
 //             onChange={handleSortChange}
 //             className="border rounded px-3 py-2 ml-2"
 //           >
-//             <option value="newest">Newest</option>
-//             <option value="price_asc">Price: Low to High</option>
-//             <option value="price_desc">Price: High to Low</option>
-//             <option value="bestseller">Bestseller</option>
+//             <option value="newest">Mới nhất</option>
+//             <option value="price_asc">Giá: Thấp đến Cao</option>
+//             <option value="price_desc">Giá: Cao đến Thấp</option>
+//             <option value="bestseller">Bán chạy nhất</option>
 //           </select>
 //         </label>
 //         <button onClick={toggleViewMode} className="px-2">
@@ -140,7 +146,7 @@
 
 //       <div className="flex">
 //         <div className="w-1/4 border-r pr-4">
-//           <h2 className="text-lg font-semibold mb-4">Categories</h2>
+//           <h2 className="text-lg font-semibold mb-4">Danh Mục</h2>
 //           <ul className="space-y-2">
 //             {(showAllCategories
 //               ? categories
@@ -168,7 +174,7 @@
 //             </button>
 //           )}
 
-//           <h2 className="text-lg font-semibold mt-8 mb-4">Brands</h2>
+//           <h2 className="text-lg font-semibold mt-8 mb-4">Thương Hiệu</h2>
 //           <ul className="space-y-2">
 //             {(showAllBrands ? brands : brands.slice(0, maxItemsToShow)).map(
 //               (brand) => (
@@ -195,7 +201,7 @@
 //             </button>
 //           )}
 
-//           <h2 className="text-lg font-semibold mt-8 mb-4">Price Range</h2>
+//           <h2 className="text-lg font-semibold mt-8 mb-4">Khoảng Giá</h2>
 //           <Slider
 //             value={filters.priceRange}
 //             onChange={handlePriceRangeChange}
@@ -227,7 +233,7 @@
 //               )
 //             ) : (
 //               <p className="text-center col-span-full text-red-500">
-//                 No products found.
+//                 Không tìm thấy sản phẩm nào.
 //               </p>
 //             )}
 //           </div>
@@ -238,7 +244,7 @@
 //               disabled={currentPage === 1}
 //               onClick={() => handlePageChange(currentPage - 1)}
 //             >
-//               Back
+//               Trước
 //             </button>
 
 //             {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
@@ -260,7 +266,7 @@
 //               disabled={currentPage === totalPages}
 //               onClick={() => handlePageChange(currentPage + 1)}
 //             >
-//               Next
+//               Tiếp
 //             </button>
 //           </div>
 //         </div>
@@ -269,8 +275,8 @@
 //   );
 // };
 
-// export default AllProducts;
-import React, { useState, useEffect } from "react";
+// export default TatCaSanPham;
+import React, { useState, useEffect, useCallback } from "react";
 import ProductService from "../../../services/ProductService";
 import { Slider } from "@mui/material";
 import GridViewIcon from "@mui/icons-material/GridView";
@@ -312,7 +318,7 @@ const TatCaSanPham = () => {
     fetchCategoriesAndBrands();
   }, []);
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       const { categoryId, brandId, priceRange } = filters;
       const [priceMin, priceMax] = priceRange;
@@ -335,15 +341,11 @@ const TatCaSanPham = () => {
       console.error("Lỗi tải sản phẩm:", error);
       setError("Không thể tải sản phẩm.");
     }
-  };
-
-  // useEffect(() => {
-  //   fetchProducts();
-  // }, [filters, sort, currentPage]);
+  }, [filters, sort, currentPage]);
 
   useEffect(() => {
     fetchProducts();
-  }, [filters, sort, currentPage, fetchProducts]);
+  }, [fetchProducts]);
 
   const handleFilterChange = (filterType, value) => {
     setFilters((prevFilters) => {
