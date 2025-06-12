@@ -145,7 +145,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import FacebookLogin from "react-facebook-login";
+// import FacebookLogin from "react-facebook-login";
 import UserService from "../../../services/UserService"; // chỉnh đường dẫn nếu cần
 
 const Login = () => {
@@ -179,27 +179,27 @@ const Login = () => {
   };
 
   // Xử lý login Facebook thành công
-  const handleFacebookResponse = async (response) => {
-    if (response.accessToken) {
-      try {
-        const res = await UserService.facebookLogin({
-          access_token: response.accessToken,
-        });
-        const loggedInUser = res.user;
-        setUser((prev) => ({ ...prev, username: loggedInUser.name }));
-        sessionStorage.setItem("user", JSON.stringify(loggedInUser));
-        setError("");
-        navigate("/");
-        window.location.reload();
-      } catch (err) {
-        setError("Đăng nhập bằng Facebook thất bại");
-      }
-    } else {
-      setError("Đăng nhập Facebook bị hủy hoặc thất bại");
-    }
-  };
+  // const handleFacebookResponse = async (response) => {
+  //   if (response.accessToken) {
+  //     try {
+  //       const res = await UserService.facebookLogin({
+  //         access_token: response.accessToken,
+  //       });
+  //       const loggedInUser = res.user;
+  //       setUser((prev) => ({ ...prev, username: loggedInUser.name }));
+  //       sessionStorage.setItem("user", JSON.stringify(loggedInUser));
+  //       setError("");
+  //       navigate("/");
+  //       window.location.reload();
+  //     } catch (err) {
+  //       setError("Đăng nhập bằng Facebook thất bại");
+  //     }
+  //   } else {
+  //     setError("Đăng nhập Facebook bị hủy hoặc thất bại");
+  //   }
+  // };
 
-  // Xử lý input thay đổi
+  // // Xử lý input thay đổi
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prev) => ({
@@ -327,13 +327,13 @@ const Login = () => {
                 }}
               ></i>
 
-              <FacebookLogin
+              {/* <FacebookLogin
                 appId="684685780864943" // Thay bằng Facebook App ID của bạn
                 callback={handleFacebookResponse}
                 cssClass="facebook-login-button" // Apply custom CSS class
                 textButton="Đăng nhập bằng Facebook"
                 scope={["email"]}
-              />
+              /> */}
             </div>
           </div>
 
