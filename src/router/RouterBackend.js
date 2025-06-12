@@ -100,6 +100,7 @@ import LayoutBackend from "../layouts/backend";
 import Navbar from "../layouts/backend/navbar";
 import Sidebar from "../layouts/backend/sidebar";
 import ShowProductSale from "../pages/backend/ProductSale/show";
+import Dashboard from "../layouts/backend/dashboard";
 
 // Define your routes with Navbar and Sidebar embedded
 const RouterBackend = [
@@ -118,6 +119,8 @@ const RouterBackend = [
       </div>
     ),
     children: [
+      { path: "dashboard", element: <Dashboard /> },
+
       // Product Routes
       { path: "product", element: <Product /> },
       { path: "product/create", element: <AddProduct /> },

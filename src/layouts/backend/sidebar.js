@@ -12,18 +12,15 @@ import {
   FaCogs,
 } from "react-icons/fa";
 
-// Navbar Component
-
 // Sidebar Component
 const Sidebar = () => {
   return (
     <aside className="bg-gray-800 text-white w-64 min-h-screen pl-5 pb-5">
       <div className="mt-4">
         <ul className="space-y-4">
-          {/* Dashboard */}
           <li>
             <Link
-              to="/admin"
+              to="/admin/dashboard"
               className="flex items-center space-x-2 p-2 hover:bg-gray-700"
             >
               <FaTachometerAlt />

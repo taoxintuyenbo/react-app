@@ -60,6 +60,7 @@ const OrderList = () => {
                 <th className="border border-gray-300 px-4 py-2">Email</th>
                 <th className="border border-gray-300 px-4 py-2">Phone</th>
                 <th className="border border-gray-300 px-4 py-2">Địa chỉ</th>
+                <th className="border border-gray-300 px-4 py-2">Thanh toán</th>
                 <th className="border border-gray-300 px-4 py-2">Hành động</th>
                 <th className="border border-gray-300 px-4 py-2">ID</th>
               </tr>
@@ -82,7 +83,9 @@ const OrderList = () => {
                       <td className="border border-gray-300 px-4 py-2">
                         {order.address}
                       </td>
-
+                      <td className="border border-gray-300 px-4 py-2">
+                        {order.payment}
+                      </td>
                       <td className="border border-gray-300 px-4 py-2">
                         <div className="flex space-x-2">
                           {/* Toggle Status Button */}
@@ -140,6 +143,20 @@ const OrderList = () => {
           </table>
         </div>
       </div>
+      <iframe
+        src="http://4.240.100.252:3000/d-solo/b2849a7d-0ef2-4f48-9b2c-85d2586df889/dashboard-01?orgId=1&from=1735664400000&to=1767200399999&timezone=browser&refresh=5s&panelId=1&__feature.dashboardSceneSolo"
+        width="100%"
+        height="600px"
+        style={{ border: "none" }}
+        title="Grafana Dashboard"
+      ></iframe>
+      <iframe
+        src="http://4.240.100.252:3000/d-solo/b2849a7d-0ef2-4f48-9b2c-85d2586df889/dashboard-01?orgId=1&from=1735664400000&to=1767200399999&timezone=browser&refresh=5s&panelId=2&__feature.dashboardSceneSolo"
+        width="100%"
+        height="600px"
+        style={{ border: "none" }}
+        title="Grafana Dashboard"
+      ></iframe>
     </section>
   );
 };

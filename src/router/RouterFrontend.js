@@ -19,7 +19,6 @@ const RouterFrontend = [
   { path: "/san-pham/:slug", element: <ProductDetail /> },
   { path: "/danh-muc/:slug", element: <ProductByCategory /> },
   { path: "/trang-don/:slug", element: <SinglePage /> },
-
   { path: "/bai-viet", element: <PostList /> },
   { path: "/bai-viet/:slug", element: <PostDetail /> },
   { path: "/lien-he", element: <Contact /> },
