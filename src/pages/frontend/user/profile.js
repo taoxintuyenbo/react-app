@@ -319,7 +319,7 @@ const UserProfile = () => {
                         {new Date(order.created_at).toLocaleDateString()}
                       </td>
                       <td className="border border-gray-300 px-4 py-2">
-                        {order.status === 1 ? "Hoạt động" : "Đã hủy"}
+                        {order.status === 1 ? "Đang giao" : "Đã hủy"}
                       </td>
                       <td className="border border-gray-300 px-4 py-2">
                         {totalMoney.toLocaleString()} VND

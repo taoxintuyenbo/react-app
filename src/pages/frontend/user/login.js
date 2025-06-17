@@ -142,11 +142,12 @@
 // };
 
 // export default Login;
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-// import FacebookLogin from "react-facebook-login";
-import UserService from "../../../services/UserService"; // chỉnh đường dẫn nếu cần
+import UserService from "../../../services/UserService";
+
+const FACEBOOK_APP_ID = "684685780864943"; // Thay bằng Facebook App ID của bạn
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -178,27 +179,6 @@ const Login = () => {
     setError("Đăng nhập bằng Google thất bại");
   };
 
-  // Xử lý login Facebook thành công
-  // const handleFacebookResponse = async (response) => {
-  //   if (response.accessToken) {
-  //     try {
-  //       const res = await UserService.facebookLogin({
-  //         access_token: response.accessToken,
-  //       });
-  //       const loggedInUser = res.user;
-  //       setUser((prev) => ({ ...prev, username: loggedInUser.name }));
-  //       sessionStorage.setItem("user", JSON.stringify(loggedInUser));
-  //       setError("");
-  //       navigate("/");
-  //       window.location.reload();
-  //     } catch (err) {
-  //       setError("Đăng nhập bằng Facebook thất bại");
-  //     }
-  //   } else {
-  //     setError("Đăng nhập Facebook bị hủy hoặc thất bại");
-  //   }
-  // };
-
   // // Xử lý input thay đổi
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -208,6 +188,61 @@ const Login = () => {
     }));
   };
 
+  // Facebook SDK loader
+  useEffect(() => {
+    if (window.FB) return;
+    window.fbAsyncInit = function () {
+      window.FB.init({
+        appId: FACEBOOK_APP_ID,
+        cookie: true,
+        xfbml: true,
+        version: "v18.0",
+      });
+    };
+    (function (d, s, id) {
+      if (d.getElementById(id)) return;
+      var js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/vi_VN/sdk.js";
+      var fjs = d.getElementsByTagName(s)[0];
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+  }, []);
+
+  // Move async logic here
+  const handleFacebookLoginResponse = async (response) => {
+    if (response.status === "connected" && response.authResponse) {
+      try {
+        const res = await UserService.facebookLogin({
+          access_token: response.authResponse.accessToken,
+        });
+        const loggedInUser = res.user;
+        setUser((prev) => ({ ...prev, username: loggedInUser.name }));
+        sessionStorage.setItem("user", JSON.stringify(loggedInUser));
+        setError("");
+        navigate("/");
+        window.location.reload();
+      } catch (err) {
+        setError("Đăng nhập bằng Facebook thất bại");
+      }
+    } else {
+      setError("Đăng nhập Facebook bị hủy hoặc thất bại");
+    }
+  };
+
+  // Facebook Login Handler
+  const handleFacebookLogin = () => {
+    if (!window.FB) {
+      setError("Không thể tải Facebook SDK");
+      return;
+    }
+    window.FB.login(
+      (response) => {
+        handleFacebookLoginResponse(response); // Not async here!
+      },
+      { scope: "email,public_profile" }
+    );
+  };
   // Xử lý submit form email/password
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -236,7 +271,7 @@ const Login = () => {
   return (
     <section className="content">
       <div className="container mx-auto py-6">
-        <h1 className="text-3xl font-semibold mb-4">Đăng nhập</h1>
+        <h1 className="text-3xl font-semibold mb-4 text-center">Đăng nhập</h1>
         {error && <div className="text-red-500 mb-4">{error}</div>}
 
         <div className="border border-gray-300 p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto">
@@ -296,45 +331,45 @@ const Login = () => {
               onError={handleGoogleError}
             />
 
-            {/* <FacebookLogin
-              appId="684685780864943" // Thay bằng Facebook App ID của bạn
-              // autoLoad
-              callback={handleFacebookResponse}
-              cssClass="my-facebook-button-class"
-              icon="fa-facebook"
-              textButton="Đăng nhập bằng Facebook"
-              scope={["email"]}
-            /> */}
-            <div
-              className="facebook-login-container"
+            <button
+              type="button"
+              onClick={handleFacebookLogin}
               style={{
                 display: "flex",
-                // justifyContent: "center", // Center the button
-                margin: "20px 0", // Add margin if needed
-                padding: "10px", // Add padding around the button
-                border: "4px", // Facebook blue border
-                borderRadius: "8px ", // Rounded corners for the container
-                height: "50px", // Adjust height to match the Google button
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                height: "50px",
+                margin: "20px 0 0 0",
+                padding: "0",
+                border: "none",
+                borderRadius: "18px",
+                backgroundColor: "#1877f3",
+                color: "#fff",
+                fontWeight: 600,
+                fontSize: "16px",
+                boxShadow: "0 2px 8px #0001",
+                cursor: "pointer",
+                transition: "background 0.2s",
               }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = "#145db2")
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = "#1877f3")
+              }
             >
-              {/* Facebook icon */}
               <i
                 className="fab fa-facebook-f"
                 style={{
-                  color: "#095895",
-                  fontSize: "20px",
-                  marginRight: "100px",
+                  color: "#fff",
+                  fontSize: "22px",
+                  marginRight: "14px",
+                  marginLeft: "-8px",
                 }}
               ></i>
-
-              {/* <FacebookLogin
-                appId="684685780864943" // Thay bằng Facebook App ID của bạn
-                callback={handleFacebookResponse}
-                cssClass="facebook-login-button" // Apply custom CSS class
-                textButton="Đăng nhập bằng Facebook"
-                scope={["email"]}
-              /> */}
-            </div>
+              Đăng nhập bằng Facebook
+            </button>
           </div>
 
           <p className="mt-4 text-gray-600 text-center">

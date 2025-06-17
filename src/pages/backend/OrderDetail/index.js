@@ -97,7 +97,7 @@ const OrderDetailList = () => {
                       {new Date(detail.updated_at).toLocaleString()}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">
-                      {detail.status === 1 ? "Active" : "Inactive"}
+                      {detail.status === 1 ? "Đang giao" : "Inactive"}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">
                       <div className="flex space-x-2">

@@ -76,6 +76,11 @@ const ProductService = {
   detail: async (slug) => {
     return await httpAxios.get(`product/${slug}`);
   },
+  searchProducts: async (query, page = 1) => {
+    return await httpAxios.get(`products/search`, {
+      params: { query, page },
+    });
+  },
 };
 
 export default ProductService;

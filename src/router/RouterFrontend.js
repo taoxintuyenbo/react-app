@@ -13,6 +13,7 @@ import UserProfile from "../pages/frontend/user/profile";
 import Cart from "../pages/frontend/cart";
 import Checkout from "../pages/frontend/cart/checkout";
 import PaymentSuccess from "../pages/frontend/cart/success-payment";
+import SearchResults from "../pages/frontend/Product/searchResult";
 const RouterFrontend = [
   { path: "/", element: <Home /> },
   { path: "san-pham", element: <AllProducts /> },
@@ -28,6 +29,7 @@ const RouterFrontend = [
   { path: "/gio-hang", element: <Cart /> },
   { path: "/thanh-toan", element: <Checkout /> },
   { path: "/thanh-toan-thanh-cong", element: <PaymentSuccess /> },
+  { path: "/tim-kiem", element: <SearchResults /> },
 ];
 
 export default RouterFrontend;

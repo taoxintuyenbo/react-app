@@ -16,7 +16,7 @@ const UserList = () => {
   useEffect(() => {
     (async () => {
       const result = await UserService.index(); // Fetch users
-      console.log(result);
+      console.log("cc", result);
       setUsers(result.users);
     })();
   }, []);
@@ -79,6 +79,10 @@ const UserList = () => {
                   Số điện thoại
                 </th>
                 <th className="border border-gray-300 px-4 py-2">Giới tính</th>
+                <th className="border border-gray-300 px-4 py-2">
+                  Hình thức đăng nhập
+                </th>
+
                 <th className="border border-gray-300 px-4 py-2">Vai trò</th>
                 <th className="border border-gray-300 px-4 py-2">Hành động</th>
                 <th className="border border-gray-300 px-4 py-2">ID</th>
@@ -108,6 +112,9 @@ const UserList = () => {
                       </td>
                       <td className="border border-gray-300 px-4 py-2">
                         {user.gender === "male" ? "Nam" : "Nữ"}
+                      </td>
+                      <td className="border border-gray-300 px-4 py-2">
+                        {user.login_method}
                       </td>
                       <td className="border border-gray-300 px-4 py-2">
                         {user.roles}
